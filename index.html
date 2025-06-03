@@ -62,11 +62,8 @@
   <div id="reveal">...ou vous auriez pu l’être. <br> Vérifiez toujours le lien que vous scannez.</div>
   <img id="logo" src="logo.png" alt="SDH - Groupe Action Logement">
   <audio id="errorSound" src="error.mp3" preload="auto"></audio>
-  <button id="start" onclick="startHack()">Démarrer</button>
 
- <script>
-  function startHack() {
-    document.getElementById('start').style.display = 'none';
+  <script>
     setTimeout(() => {
       document.getElementById('warning').style.display = 'block';
       document.getElementById('errorSound').play();
@@ -76,5 +73,6 @@
       document.getElementById('reveal').style.display = 'block';
       document.getElementById('logo').style.display = 'block';
     }, 3000);
-  }
-</script>
+  </script>
+</body>
+</html>
