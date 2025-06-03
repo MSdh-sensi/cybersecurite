@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <title>Vous avez été piraté</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Police Matrix style -->
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
   <style>
@@ -59,51 +57,34 @@
       0% { opacity: 1; }
       100% { opacity: 0.6; }
     }
-
-    #start {
-      position: absolute;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 2vw;
-      padding: 1em 2em;
-      background-color: #111;
-      color: #00FF00;
-      border: 2px solid #00FF00;
-      font-family: 'Share Tech Mono', monospace;
-      cursor: pointer;
-      z-index: 2;
-    }
   </style>
 </head>
 <body>
 
 <canvas id="matrix"></canvas>
 
-<button id="start" onclick="startHack()">Démarrer</button>
-
-<div id="warning" style="display:none;">⚠️ VOUS AVEZ ÉTÉ PIRATÉ ⚠️</div>
+<div id="warning">⚠️ VOUS AVEZ ÉTÉ PIRATÉ ⚠️</div>
 <div id="reveal">...ou vous auriez pu l’être.<br>Ne scannez pas n'importe quoi.</div>
 <img id="logo" src="logo.png" alt="SDH - Groupe Action Logement">
 
 <audio id="errorSound" src="error.mp3" preload="auto"></audio>
 
 <script>
-  function startHack() {
-    document.getElementById('start').style.display = 'none';
+  // Affiche les éléments au bon moment
+  setTimeout(() => {
+    const audio = document.getElementById('errorSound');
+    audio.play().catch(e => {
+      // Ignorer l'erreur si l'autoplay est bloqué
+      console.warn("Autoplay bloqué : son non joué.");
+    });
+  }, 500);
 
-    setTimeout(() => {
-      document.getElementById('warning').style.display = 'block';
-      document.getElementById('errorSound').play();
-    }, 500);
+  setTimeout(() => {
+    document.getElementById('reveal').style.display = 'block';
+    document.getElementById('logo').style.display = 'block';
+  }, 3000);
 
-    setTimeout(() => {
-      document.getElementById('reveal').style.display = 'block';
-      document.getElementById('logo').style.display = 'block';
-    }, 3000);
-  }
-
-  // Matrix effect
+  // Effet Matrix
   const canvas = document.getElementById('matrix');
   const ctx = canvas.getContext('2d');
 
@@ -136,5 +117,6 @@
 
   setInterval(drawMatrix, 33);
 </script>
+
 </body>
 </html>
