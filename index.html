@@ -2,13 +2,13 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Attention !</title>
+  <title>Cybersécurité</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      background: black;
+      background: #4B0000;
       color: red;
       font-family: 'Courier New', Courier, monospace;
       height: 100%;
@@ -18,19 +18,28 @@
       align-items: center;
       flex-direction: column;
       text-align: center;
+      position: relative;
     }
 
     #warning {
-      font-size: 5vw;
+      font-size: 8vw;
       display: none;
       animation: shake 0.5s infinite;
     }
 
     #reveal {
-      font-size: 2vw;
+      font-size: 3vw;
       display: none;
       color: white;
       margin-top: 2rem;
+    }
+
+    #logo {
+      display: none;
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 150px;
     }
 
     @keyframes shake {
@@ -50,15 +59,19 @@
 </head>
 <body>
   <div id="warning">⚠️ VOUS AVEZ ÉTÉ PIRATÉ ! ⚠️</div>
-  <div id="reveal">...ou vous auriez pu l’être. <br> Ne scannez pas n'importe quel QR code !</div>
+  <div id="reveal">...ou vous auriez pu l’être. <br> Ne scannez pas n'importe quoi.</div>
+  <img id="logo" src="logo.png" alt="SDH - Groupe Action Logement">
+  <audio id="errorSound" src="error.mp3" preload="auto"></audio>
 
   <script>
     setTimeout(() => {
       document.getElementById('warning').style.display = 'block';
+      document.getElementById('errorSound').play();
     }, 500);
 
     setTimeout(() => {
       document.getElementById('reveal').style.display = 'block';
+      document.getElementById('logo').style.display = 'block';
     }, 3000);
   </script>
 </body>
