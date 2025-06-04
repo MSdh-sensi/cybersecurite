@@ -24,13 +24,14 @@
 
     #warning {
       position: absolute;
-      top: 30%;
+      top: 25%;
       width: 100%;
       text-align: center;
-      font-size: 5vw;
-      color: #00FF00;
+      font-size: 6vw;
+      color: #FFFFFF;
       z-index: 1;
       animation: flicker 1s infinite alternate;
+      padding: 0 10px;
     }
 
     #reveal {
@@ -39,16 +40,17 @@
       width: 100%;
       text-align: center;
       color: white;
-      font-size: 2vw;
+      font-size: 4vw;
       z-index: 1;
       display: none;
+      padding: 0 10px;
     }
 
     #logo {
       position: absolute;
-      bottom: 20px;
-      right: 20px;
-      width: 120px;
+      bottom: 10px;
+      right: 10px;
+      width: 80px;
       display: none;
       z-index: 1;
     }
@@ -57,6 +59,19 @@
       0% { opacity: 1; }
       100% { opacity: 0.6; }
     }
+
+    @media (min-width: 768px) {
+      #warning {
+        font-size: 5vw;
+      }
+      #reveal {
+        font-size: 2vw;
+        top: 60%;
+      }
+      #logo {
+        width: 120px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -64,27 +79,25 @@
 <canvas id="matrix"></canvas>
 
 <div id="warning">⚠️ VOUS AVEZ ÉTÉ PIRATÉ ⚠️</div>
-<div id="reveal">...ou vous auriez pu l’être.<br>Vérifiez toujours le lien que vous scannez.</div>
+<div id="reveal">...ou vous auriez pu l’être.<br>Ne scannez pas n'importe quoi.</div>
 <img id="logo" src="logo.png" alt="SDH - Groupe Action Logement">
 
 <audio id="errorSound" src="error.mp3" preload="auto"></audio>
 
 <script>
-  // Affiche les éléments au bon moment
+  // Jouer le son si possible
   setTimeout(() => {
     const audio = document.getElementById('errorSound');
-    audio.play().catch(e => {
-      // Ignorer l'erreur si l'autoplay est bloqué
-      console.warn("Autoplay bloqué : son non joué.");
-    });
+    audio.play().catch(() => {});
   }, 500);
 
+  // Afficher texte + logo
   setTimeout(() => {
     document.getElementById('reveal').style.display = 'block';
     document.getElementById('logo').style.display = 'block';
   }, 3000);
 
-  // Effet Matrix
+  // Matrix effect
   const canvas = document.getElementById('matrix');
   const ctx = canvas.getContext('2d');
 
